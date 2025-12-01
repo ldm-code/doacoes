@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import re
 app=Flask(__name__)
 app.secret_key = "minha_chave_super_secreta_123"
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:root@127.0.0.1/doacoes"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:sua_senha_do_banco_aqui@127.0.0.1/doacoes"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db=SQLAlchemy(app)
 class Usuario(db.Model):
