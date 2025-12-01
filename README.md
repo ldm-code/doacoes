@@ -30,7 +30,7 @@ O projeto inclui **CRUD de doações**, autenticação de usuários e interface 
 - │ │   └── login.css
 - │ └── js/ # JavaScript
 - │ │   └──inicial.js
-- ├── templates/
+- ├── templates/ # arquivos.html do projeto
 - │ │   ├── doar.html
 - │ │   ├── usuario.html
 - │ │   ├── inicial.html
