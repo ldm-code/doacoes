@@ -21,7 +21,7 @@ O projeto inclui **CRUD de doações**, autenticação de usuários e interface 
 - │
 - ├── manage.py # Arquivo principal para rodar a aplicação
 - ├── dados/ # Scripts .sql do banco de dados
-- │ │   └──banco_doacoes.sql
+- │ │   └──banco.sql
 - ├── static/
 - │ ├── css/ # Arquivos de estilo
 - │ │   ├── doar.css
@@ -32,6 +32,7 @@ O projeto inclui **CRUD de doações**, autenticação de usuários e interface 
 - │ │   └──inicial.js
 - ├── templates/ # arquivos.html do projeto
 - │ │   ├── doar.html
+- │ │   ├── movimentacoes.html
 - │ │   ├── usuario.html
 - │ │   ├── inicial.html
 - │ │   └── login.html
