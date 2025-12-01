@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inicial.css') }}">
+    <title>Movimentações de Doações</title>
+</head>
+<body>
+    <h1>Movimentações de Doações</h1>
+    <a href="{{ url_for('produtos_para_doacao') }}">
+    <button type="button">Voltar</button>
+    </a>
+
+    {% if movimentacoes %}
+    <ul>
+        {% for mov in movimentacoes %}
+        <li>
+            <strong>Produto:</strong> {{ mov.produto.nome }}<br>
+            <strong>Quantidade:</strong> {{ mov.quantidade }}<br>
+            <strong>Tipo:</strong> {{ mov.tipo.value }}<br>
+            <strong>Usuário:</strong> {{ mov.usuario.nome }}<br>
+            <strong>Local Saída:</strong> {{ mov.local_saida }}<br>
+            <strong>Local Entrega:</strong> {{ mov.local_entrega }}<br>
+            <strong>Data:</strong> {{ mov.data.strftime('%d/%m/%Y %H:%M') }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Nenhuma movimentação registrada.</p>
+    {% endif %}
+</body>
+</html>

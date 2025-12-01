@@ -12,6 +12,9 @@
     <form action="/view" method="GET">
         <input type="submit" value="Cadastrar Produtos">
     </form>
+    <form action="{{ url_for('movimentacoes') }}" method="GET">
+         <input type="submit" value="Ver doacoes feitas">
+    </form>
   
 
     {% if produtos %}

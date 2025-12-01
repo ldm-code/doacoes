@@ -1,9 +1,11 @@
 from flask import Flask,render_template,request,url_for,redirect,session
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
+from enum import Enum
 import re
 app=Flask(__name__)
 app.secret_key = "minha_chave_super_secreta_123"
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:sua_senha_do_banco_aqui@127.0.0.1/doacoes"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:sua_senha_do_banco_aqui@127.0.0.1/doacoes" 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db=SQLAlchemy(app)
 class Usuario(db.Model):
@@ -28,6 +30,24 @@ class Produto(db.Model):
 
 Usuario.produtos = db.relationship('Produto', backref='usuario', lazy=True)
 
+class TipoMovimentacao(Enum):
+    doacao = 'doacao'
+    recebimento = 'recebimento'
+
+class Movimentacao(db.Model):
+    __tablename__ = 'movimentacoes'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    produto_id = db.Column(db.Integer, db.ForeignKey('produtos.id'), nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
+    quantidade = db.Column(db.Integer, nullable=False)
+    tipo = db.Column(db.Enum(TipoMovimentacao), nullable=False, default=TipoMovimentacao.doacao)
+    data = db.Column(db.DateTime, server_default=func.now())
+    local_saida = db.Column(db.String(100), nullable=False)
+    local_entrega = db.Column(db.String(100), nullable=False)
+
+    produto = db.relationship('Produto', backref='movimentacoes')
+    usuario = db.relationship('Usuario', backref='movimentacoes')
 with app.app_context():
     db.create_all()
 @app.route('/')
@@ -94,11 +114,13 @@ def receber_doacao(produto_id):
     usuario_id = session.get('usuario_id')
     local=request.form.get('local_entrega')
     qtd=int(request.form.get('quantidade_receber'))
+   
     if not usuario_id:
         return "Usuário não logado", 401
     
     produto = Produto.query.get_or_404(produto_id)
-    
+    produto_real=produto.id
+    local_saida=produto.local_recebimento
     if produto.quantidade <= 0:
         return "Doação esgotada!", 400
     
@@ -106,8 +128,28 @@ def receber_doacao(produto_id):
     produto.quantidade -= qtd
     produto.quantidade_doada += qtd
     produto.local_entrega=local
+    mov = Movimentacao(
+    produto_id=produto_real,    
+    usuario_id=usuario_id,   
+    quantidade=qtd,             
+    tipo=TipoMovimentacao.recebimento,
+    local_saida=local_saida,
+    local_entrega=local
+    )
+
+    db.session.add(mov)
+
     db.session.commit()
     doacoes=Produto.query.filter(Produto.quantidade>0).all()
     return render_template('inicial.html',produtos=doacoes)
+@app.route('/produtos')
+def produtos_para_doacao():
+    doacoes = Produto.query.filter(Produto.quantidade > 0).all()
+    return render_template('inicial.html', produtos=doacoes)
+
+@app.route('/movimentacoes',methods=['GET'])
+def movimentacoes():
+     movimentacoes=Movimentacao.query.all()
+     return render_template('movimentacoes.html',movimentacoes=movimentacoes)
 if __name__=='__main__':
         app.run(debug=True)
