@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inicial.css') }}">
+
+    <title>Lista de Usuários</title>
+</head>
+<body>
+    <h1>Itens em estoque:</h1>
+
+    <form action="/view" method="GET">
+        <input type="submit" value="Cadastrar Produtos">
+    </form>
+  
+
+    {% if produtos %}
+    <ul>
+    {% for produto in produtos %}
+    <li>
+         {{ produto.nome }} - disponiveis: {{ produto.quantidade }}  
+    - tipo: {{ produto.tipo }} 
+    - buscar em: {{ produto.local_recebimento if produto.local_recebimento else '' }} 
+    - doados: {{ produto.quantidade_doada if produto.quantidade_doada else '' }} 
+    {% if produto.local_entrega %}
+        - local de entrega: {{ produto.local_entrega }}
+    {% endif %}
+        <button type="button" data-produto-id="{{ produto.id }}">Receber:</button>
+
+        <form id="form-{{ produto.id }}" action="{{ url_for('receber_doacao', produto_id=produto.id) }}" method="POST" style="display:none; margin-top:5px;">
+    <input type="text" name="local_entrega" placeholder="Local de entrega" required>
+    <input type="number" name="quantidade_receber" min="1" max="{{ produto.quantidade }}" placeholder="Quantidade" required>
+    <button type="submit">Confirmar</button>
+</form>
+    </li>
+    {% endfor %}
+</ul>
+    {% else %}
+    <p>Nenhum produto cadastrado.</p>
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/inicial.js') }}"></script>
+
+</body>
+</html>

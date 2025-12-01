@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/doar.css') }}">
+    <title>Cadastro de Produto:</title>
+</head>
+<body>
+    <h1>Cadastro de Produto:</h1>
+    <form action="/produto" method="POST">
+        <label for="nome">Nome do Produto:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+      <label for="tipo">Tipo do Produto:</label><br>
+          <select id="tipo" name="tipo" required>
+                    <option value="">Selecione</option>
+                    <option value="Alimento">Alimento</option>
+                    <option value="Roupa">Roupa</option>
+                    <option value="Móvel">Móvel</option>
+          </select>
+
+        <label for="quantidade">Quantidade:</label><br>
+        <input type="number" id="quantidade" name="quantidade" min="1" required><br><br>
+
+        <label for="local_recebimento">Local de Recebimento:</label><br>
+        <input type="text" id="local_recebimento" name="local_recebimento"><br><br>
+
+        <button type="submit">Cadastrar Produto</button>
+    </form>
+</body>
+</html>
