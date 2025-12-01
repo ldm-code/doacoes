@@ -10,7 +10,7 @@ O projeto inclui **CRUD de doações**, autenticação de usuários e interface 
 - **Python 3.13**
 - **Flask** – framework web
 - **SQLAlchemy** – ORM para banco de dados
-- **MySQL** – banco de dados (ou SQLite para testes)
+- **MySQL** – banco de dados 
 - **HTML / CSS / JavaScript** – frontend interativo
 
 ---
