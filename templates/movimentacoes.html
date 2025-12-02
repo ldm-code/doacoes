@@ -21,7 +21,14 @@
             <strong>Usuário:</strong> {{ mov.usuario.nome }}<br>
             <strong>Local Saída:</strong> {{ mov.local_saida }}<br>
             <strong>Local Entrega:</strong> {{ mov.local_entrega }}<br>
-            <strong>Data:</strong> {{ mov.data.strftime('%d/%m/%Y %H:%M') }}
+            <strong>Data:</strong> {{ mov.data.strftime('%d/%m/%Y %H:%M') }} <br>
+            <strong>Status:</strong> {{ mov.status.value }}
+            {% if session['usuario_id'] == mov.usuario_id or session['usuario_id'] == mov.produto.usuario_id %}
+              <form action="{{ url_for('update_movimentacoes', mov_id=mov.id) }}" method="POST">
+
+                  <button type="submit">Marcar como recebida:</button>
+                </form>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>

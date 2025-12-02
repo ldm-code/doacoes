@@ -29,7 +29,9 @@ class Produto(db.Model):
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
 
 Usuario.produtos = db.relationship('Produto', backref='usuario', lazy=True)
-
+class StatusMovimentacao(Enum):
+    enviada = 'enviada'
+    recebida = 'recebida'
 class TipoMovimentacao(Enum):
     doacao = 'doacao'
     recebimento = 'recebimento'
@@ -45,7 +47,7 @@ class Movimentacao(db.Model):
     data = db.Column(db.DateTime, server_default=func.now())
     local_saida = db.Column(db.String(100), nullable=False)
     local_entrega = db.Column(db.String(100), nullable=False)
-
+    status = db.Column(db.Enum(StatusMovimentacao), nullable=False, default=StatusMovimentacao.enviada)
     produto = db.relationship('Produto', backref='movimentacoes')
     usuario = db.relationship('Usuario', backref='movimentacoes')
 with app.app_context():
@@ -134,7 +136,8 @@ def receber_doacao(produto_id):
     quantidade=qtd,             
     tipo=TipoMovimentacao.recebimento,
     local_saida=local_saida,
-    local_entrega=local
+    local_entrega=local,
+    status=StatusMovimentacao.enviada
     )
 
     db.session.add(mov)
@@ -151,5 +154,13 @@ def produtos_para_doacao():
 def movimentacoes():
      movimentacoes=Movimentacao.query.all()
      return render_template('movimentacoes.html',movimentacoes=movimentacoes)
+@app.route('/update_movimentacoes/<int:mov_id>', methods=['POST'])
+def update_movimentacoes(mov_id):
+    mov=Movimentacao.query.get(mov_id)
+    if not mov:
+          return "Movimentação não encontrada", 404
+    mov.status = StatusMovimentacao.recebida
+    db.session.commit()
+    return redirect(url_for('movimentacoes'))
 if __name__=='__main__':
         app.run(debug=True)
