@@ -33,6 +33,7 @@ CREATE TABLE `movimentacoes` (
   `data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `local_saida` varchar(100) NOT NULL,
   `local_entrega` varchar(100) NOT NULL,
+   status ENUM('enviada', 'recebida')  DEFAULT 'enviada',
   PRIMARY KEY (`id`),
   KEY `produto_id` (`produto_id`),
   KEY `usuario_id` (`usuario_id`),
