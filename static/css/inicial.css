@@ -1,4 +1,4 @@
-/* Reset básico */
+
 * {
     margin: 0;
     padding: 0;
@@ -64,7 +64,7 @@ li span {
     font-weight: bold;
 }
 
-p {
+strong {
     text-align: center;
     color: #7f8c8d;
     font-size: 1.1em;

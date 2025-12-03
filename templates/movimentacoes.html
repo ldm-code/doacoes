@@ -14,7 +14,7 @@
     {% if movimentacoes %}
     <ul>
         {% for mov in movimentacoes %}
-        <li>
+         <li data-status="{{mov.status.value}}">
             <strong>Produto:</strong> {{ mov.produto.nome }}<br>
             <strong>Quantidade:</strong> {{ mov.quantidade }}<br>
             <strong>Tipo:</strong> {{ mov.tipo.value }}<br>
@@ -29,11 +29,12 @@
                   <button type="submit">Marcar como recebida:</button>
                 </form>
             {% endif %}
-        </li>
+         </li>
         {% endfor %}
     </ul>
     {% else %}
     <p>Nenhuma movimentação registrada.</p>
     {% endif %}
+    <script src="{{ url_for('static', filename='js/movimentacoes.js') }}"></script>
 </body>
 </html>

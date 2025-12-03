@@ -22,13 +22,13 @@
     {% for produto in produtos %}
     <li>
         <strong>{{ produto.nome }}</strong><br>
-        <strong>disponiveis: {{ produto.quantidade }}</strong> <br>  
-        <strong>tipo: {{ produto.tipo }} </strong> <br>  
-        <strong>buscar em: {{ produto.local_recebimento if produto.local_recebimento else '' }} </strong> <br>  
-        <strong>doados: {{ produto.quantidade_doada if produto.quantidade_doada else '' }}   </strong> <br>   
+        <strong>disponiveis: </strong> {{ produto.quantidade }}<br>  
+        <strong>tipo: </strong>  {{ produto.tipo }}<br>  
+        <strong>buscar em: </strong>{{ produto.local_recebimento if produto.local_recebimento else '' }} <br>  
+        <strong>doados: </strong> {{ produto.quantidade_doada if produto.quantidade_doada else '' }}   <br>   
  
     {% if produto.local_entrega %}
-           <strong>local de entrega: {{ produto.local_entrega }}</strong> <br>   
+           <strong>local de entrega: </strong>{{ produto.local_entrega }} <br>   
         
     {% endif %}
         <button type="button" data-produto-id="{{ produto.id }}">Receber:</button>

@@ -1,11 +1,11 @@
-/* usuario.css */
+
 
 body {
     background-color: #f2f4f8;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;   /* centraliza o conteúdo horizontalmente */
+    align-items: center;   
     padding: 50px;
     min-height: 100vh;
     color: #333;
@@ -13,7 +13,7 @@ body {
 
 h1 {
     color: #2c3e50;
-    margin-bottom: 40px;   /* espaço entre o título e o formulário */
+    margin-bottom: 40px;  
     text-align: center;
 }
 
