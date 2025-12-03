@@ -5,7 +5,7 @@ from enum import Enum
 import re
 app=Flask(__name__)
 app.secret_key = "minha_chave_super_secreta_123"
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:sua_senha_do_banco_atual@127.0.0.1/doacoes" 
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:sua_senha_atual_do_banco@127.0.0.1/doacoes" 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db=SQLAlchemy(app)
 class Usuario(db.Model):
@@ -152,7 +152,7 @@ def produtos_para_doacao():
 
 @app.route('/movimentacoes',methods=['GET'])
 def movimentacoes():
-     movimentacoes=Movimentacao.query.all()
+     movimentacoes=Movimentacao.query.order_by(Movimentacao.id.desc()).all()
      return render_template('movimentacoes.html',movimentacoes=movimentacoes)
 @app.route('/update_movimentacoes/<int:mov_id>', methods=['POST'])
 def update_movimentacoes(mov_id):
