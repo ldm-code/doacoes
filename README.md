@@ -47,6 +47,7 @@ O projeto inclui **CRUD de doações**, autenticação de usuários e interface 
 - Visualizar doações de outros usuários
 - Formulários interativos que podem ser mostrados ou ocultados
 - Interface simples e intuitiva
+- Controle de movimentacoes
 
 ---
 ## Observacoes
