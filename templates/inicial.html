@@ -28,16 +28,18 @@
         <strong>doados: </strong> {{ produto.quantidade_doada if produto.quantidade_doada else '' }}   <br>   
  
     {% if produto.local_entrega %}
-           <strong>local de entrega: </strong>{{ produto.local_entrega }} <br>   
+           <strong>local de entrega da ultima doação: </strong>{{ produto.local_entrega }} <br>   
         
     {% endif %}
+    {% if session['usuario_id'] != produto.usuario_id %}
         <button type="button" data-produto-id="{{ produto.id }}">Receber:</button>
 
         <form id="form-{{ produto.id }}" action="{{ url_for('receber_doacao', produto_id=produto.id) }}" method="POST" style="display:none; margin-top:5px;">
-    <input type="text" name="local_entrega" placeholder="Local de entrega" required>
-    <input type="number" name="quantidade_receber" min="1" max="{{ produto.quantidade }}" placeholder="Quantidade" required>
-    <button type="submit">Confirmar</button>
-</form>
+         <input type="text" name="local_entrega" placeholder="Local de entrega" required>
+         <input type="number" name="quantidade_receber" min="1" max="{{ produto.quantidade }}" placeholder="Quantidade" required>
+          <button type="submit">Confirmar</button>
+        </form>
+     {% endif %}
     </li>
     {% endfor %}
 </ul>

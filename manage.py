@@ -77,7 +77,7 @@ def login():
        if usuario:
          session['usuario_id'] = usuario.id 
        
-         doacoes=Produto.query.filter(Produto.quantidade>0).all()
+         doacoes=Produto.query.filter(Produto.quantidade>0,   ).all()
          return render_template('inicial.html',produtos=doacoes)
        else:
             return "Email ou senha incorretos", 401
