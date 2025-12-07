@@ -2,6 +2,7 @@ from flask import Flask,render_template,request,url_for,redirect,session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from enum import Enum
+from werkzeug.security import check_password_hash,generate_password_hash
 import re
 app=Flask(__name__)
 app.secret_key = "minha_chave_super_secreta_123"
@@ -61,11 +62,11 @@ def cadastro():
         email=request.form.get('email')
         senha=request.form.get('senha')
         cpf=request.form.get('cpf')
+        senha_hash=generate_password_hash(senha)
         if not re.fullmatch(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf):
                      return 'CPF inválido', 400
-       
         else:
-         dados=Usuario(nome=nome,email=email,senha=senha,cpf=cpf)
+         dados=Usuario(nome=nome,email=email,senha=senha_hash,cpf=cpf)
          db.session.add(dados)
          db.session.commit()
          return render_template('login.html')
@@ -73,8 +74,8 @@ def cadastro():
 def login():
        email=request.form.get('email').strip()
        senha=request.form.get('senha').strip()
-       usuario=Usuario.query.filter_by(email=email,senha=senha).first()
-       if usuario:
+       usuario=Usuario.query.filter_by(email=email).first()
+       if usuario and check_password_hash(usuario.senha, senha):
          session['usuario_id'] = usuario.id 
        
          doacoes=Produto.query.filter(Produto.quantidade>0,   ).all()
