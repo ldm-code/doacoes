@@ -43,7 +43,8 @@ O projeto inclui **CRUD de doações**, autenticação de usuários e interface 
 ##  Funcionalidades
 
 - Cadastro e login basico de usuários
-- Criar, e editar  (CRUD)
+- CRUD simples
+- criptografia de senha basica com werkzeug.security.
 - Visualizar doações de outros usuários
 - Formulários interativos que podem ser mostrados ou ocultados
 - Interface simples e intuitiva
