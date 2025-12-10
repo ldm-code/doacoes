@@ -13,7 +13,7 @@
         <input type="submit" value="Cadastrar Produtos">
     </form>
     <form action="{{ url_for('movimentacoes') }}" method="GET">
-         <input type="submit" value="Ver doacoes feitas">
+         <input type="submit" id="movimentos" value="Ver doacoes feitas">
     </form>
   
 
@@ -37,7 +37,7 @@
         <form id="form-{{ produto.id }}" action="{{ url_for('receber_doacao', produto_id=produto.id) }}" method="POST" style="display:none; margin-top:5px;">
          <input type="text" name="local_entrega" placeholder="Local de entrega" required>
          <input type="number" name="quantidade_receber" min="1" max="{{ produto.quantidade }}" placeholder="Quantidade" required>
-          <button type="submit">Confirmar</button>
+          <button type="submit" id="botao">Confirmar</button>
         </form>
      {% endif %}
     </li>
