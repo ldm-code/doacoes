@@ -61,3 +61,4 @@ O projeto inclui **CRUD de doações**,**Automacao de testes basica com Selenium
 ## Observacoes
 - o projeto precisa de python 3.13 ou acima e ter o framework flask e sqlalchemy instalados
 - antes de rodar a aplicacao execute o arquivo.sql em seu workbench para criar o banco e crie a conexao ,alem de alterar a variavel sua senha do banco pra sua senha real do banco.
+- no arquivo,testes.py,o id usado pode nao existir em seu banco,pra que o teste funcione,voce deve criar um cadastro no banco e alterar a variavel produto_id pro respectivo id desse elemento(o estoque dele deve ser maior que 0 pra que a aplicacao funcione).
