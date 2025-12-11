@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
-
+import datetime
 
 def test():
           
@@ -14,26 +14,26 @@ def test():
           def visible(driver,by,selector,timeout=10):
                   return WebDriverWait(driver,timeout).until(EC.visibility_of_element_located((by,selector)))
           try:
-                  
+                  timestamp= datetime.datetime.now().strftime("%Y%m%d%H%M%S")
                   try:
                     print("abriu")
                     driver.get("http://127.0.0.1:5000/")
                   except Exception as e:
-                       driver.save_screenshot("erros/erro.png")
+                       driver.save_screenshot(f"erros/erro_{timestamp}.png")
                        print(f"erro ,{e}")  
                   print("abrindo login")
                   try:
                     timer(driver,By.TAG_NAME,"a").click()
                   except Exception as e:
                        print(f"erro,{e}")
-                       driver.save_screenshot("erros/erro.png")
+                       driver.save_screenshot(f"erros/erro_{timestamp}.png")
                   timer(driver,By.NAME,"email").send_keys("jose@gmail.com")
                   timer(driver,By.NAME,"senha").send_keys("123")
                   try:
                     timer(driver,By.ID,"btn").click()
                   except Exception as e:
                        print(f"erro,{e}")
-                       driver.save_screenshot("erros/erro.png")
+                       driver.save_screenshot(f"erros/erro_{timestamp}.png")
                   print("cadastrou")
                 
                   print("recebendo produto")
@@ -63,7 +63,7 @@ def test():
                           arquivo.write(m.text +"\n")
                     except Exception as e:
                           print(f"nao funcionou, {e}")
-                          driver.save_screenshot("erros/erro.png")
+                          driver.save_screenshot(f"erros/erro_{timestamp}.png")
 
                   print("\n")
                   timer(driver,By.TAG_NAME,"a").click()
@@ -76,10 +76,10 @@ def test():
                          arquivo.write(p.text +"\n")
                     except Exception as e:
                           print(f"nao funcionou, {e}")
-                          driver.save_screenshot("erros/erro.png")
+                          driver.save_screenshot(f"erros/erro_{timestamp}.png")
           except Exception as e:
                   print(f"nao funcionou, {e}")
-                  driver.save_screenshot("erros/erro.png")
+                  driver.save_screenshot(f"erros/erro_{timestamp}.png")
 
           finally:
                   driver.quit()
