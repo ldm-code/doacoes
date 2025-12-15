@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import Select
 import datetime
 
 def test():
@@ -15,6 +16,7 @@ def test():
                   return WebDriverWait(driver,timeout).until(EC.visibility_of_element_located((by,selector)))
           try:
                   timestamp= datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+                 
                   try:
                     print("abriu")
                     driver.get("http://127.0.0.1:5000/")
@@ -34,8 +36,19 @@ def test():
                   except Exception as e:
                        print(f"erro,{e}")
                        driver.save_screenshot(f"erros/erro_{timestamp}.png")
-                  print("cadastrou")
-                
+                  print("logou")
+                  try:
+                   timer(driver,By.ID,"doar").click()
+                   timer(driver,By.ID,"nome").send_keys("massa")
+                   elemento=driver.find_element(By.ID,"tipo")
+                   select=Select(elemento)
+                   select.select_by_value("Alimento")
+                   timer(driver,By.ID,"quantidade").send_keys(1000)
+                   timer(driver,By.ID,"local_recebimento").send_keys("tapera RS casa numero 48")
+                   timer(driver,By.ID,"cadastro").click()
+                  except Exception as es:
+                       print(f"erro no cadastro,{es}")
+                       driver.save_screenshot(f"erros/erro_{timestamp}.png")
                   print("recebendo produto")
                   produto_id=25 # mude o numero 25 para o id de algum produto que voce tenha cadastrado no banco
 
