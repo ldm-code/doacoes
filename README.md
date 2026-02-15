@@ -66,6 +66,23 @@ O projeto inclui **CRUD de doações**,**Automacao de testes basica com Selenium
 ---
 ## Instalacao de frameworks:
 - os comandos a seguir instalam as bibliotecas necessarias para rodar a aplicação:
-pip install flask
-pip install sqlalchemy
+
+```bash
+# clonar repositório
+git clone https://github.com/ldm-code/doacoes.git
+cd doacoes
+
+# apos isso configrar ambiente
+
+# Para linux/macOS use:
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Para Windows (PowerShell):
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+# Instalando as dependencias do projeto:
+pip install Flask
+pip install SQLAlchemy
 pip install selenium
