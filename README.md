@@ -86,3 +86,4 @@ python -m venv .venv
 pip install Flask
 pip install SQLAlchemy
 pip install selenium
+```
