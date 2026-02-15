@@ -63,3 +63,9 @@ O projeto inclui **CRUD de doações**,**Automacao de testes basica com Selenium
 - Antes de rodar a aplicacao execute o arquivo.sql em seu workbench para criar o banco e crie a conexao ,alem de alterar a variavel sua senha do banco pra sua senha real do banco.
 - No arquivo,testes.py,o id usado pode nao existir em seu banco,pra que o teste funcione,voce deve criar um cadastro no banco e alterar a variavel produto_id pro respectivo id desse elemento(o estoque dele deve ser maior que 0 pra que a aplicacao funcione).
 - Tambem no testes.py,voce precisa ter um cadastro com email jose@gmail.com e senha 123 no seu banco de dados,ou outro email e senha de usuario cadastrado nesses campos para a automação funcionar da forma desejada.
+---
+## Instalacao de frameworks:
+- os comandos a seguir instalam as bibliotecas necessarias para rodar a aplicação:
+pip install flask
+pip install sqlalchemy
+pip install selenium
