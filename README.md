@@ -86,4 +86,8 @@ python -m venv .venv
 pip install Flask
 pip install SQLAlchemy
 pip install selenium
+pip install PyMySQL
+
+
 ```
+ - caso de erro de driver apos o igual antes do // coloque mysql+pymysql.
