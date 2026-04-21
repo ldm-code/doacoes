@@ -4,9 +4,13 @@ from sqlalchemy.sql import func
 from enum import Enum
 from werkzeug.security import check_password_hash,generate_password_hash
 import re
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 app=Flask(__name__)
-app.secret_key = "minha_chave_super_secreta_123"
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:sua_senha_do_banco@127.0.0.1/doacoes" #sua_senha_do_banco
+app.secret_key =  os.getenv("SECRET_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")#sua_senha_do_banco
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db=SQLAlchemy(app)
 class Usuario(db.Model):
